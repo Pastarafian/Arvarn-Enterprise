@@ -45,7 +45,7 @@ export default function Dashboard({ token, logout }: { token: string; logout: ()
     <div className="h-screen flex overflow-hidden">
       <aside className="w-64 glass-panel border-r border-border border-y-0 border-l-0 flex flex-col rounded-none z-20">
         <div className="h-16 flex items-center px-6 border-b border-border">
-          <h1 className="text-xl font-bold glow-text">MarliAI Admin</h1>
+          <h1 className="text-xl font-bold glow-text">Arvarn Admin</h1>
         </div>
         <nav className="flex-1 p-4 space-y-2">
           <Link to="/dashboard" className="nav-item active"><Activity className="w-5 h-5" /> Overview</Link>

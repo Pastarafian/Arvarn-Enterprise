@@ -11,9 +11,9 @@ export default function Homepage() {
       <nav className="h-20 flex items-center justify-between px-6 md:px-10 relative z-50 glass-panel rounded-b-2xl mx-4 mt-0 border-t-0 sticky top-0">
         <div className="text-2xl font-extrabold tracking-tight flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg">
-            <span className="text-white text-sm">M</span>
+            <span className="text-white text-sm">A</span>
           </div>
-          <span className="glow-text">MarliAI</span>
+          <span className="glow-text">Arvarn</span>
         </div>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-sub">
           <button onClick={() => document.getElementById('features')?.scrollIntoView({behavior: 'smooth'})} className="hover:text-text transition-colors">Features</button>
@@ -38,7 +38,7 @@ export default function Homepage() {
               <span className="glow-text">From Memory.</span>
             </h1>
             <p className="text-lg md:text-xl text-sub mb-10 max-w-2xl mx-auto leading-relaxed">
-              Marli is an AI site agent that handles the business side of your trade so you can focus on the tools. Send a WhatsApp message. Marli does the rest.
+              Arvarn is an AI site agent that handles the business side of your trade so you can focus on the tools. Send a WhatsApp message. Arvarn does the rest.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/onboarding" className="px-8 py-4 bg-text text-bg font-bold rounded-xl hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1">
@@ -62,17 +62,17 @@ export default function Homepage() {
               <div className="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-transform">
                 <div className="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center mb-6"><Activity className="w-6 h-6"/></div>
                 <h3 className="text-xl font-bold mb-3">Job Management</h3>
-                <p className="text-sub text-sm leading-relaxed mb-4">"Start job: Smith kitchen." Marli opens the job, creates a timeline, and logs all future expenses against it automatically.</p>
+                <p className="text-sub text-sm leading-relaxed mb-4">"Start job: Smith kitchen." Arvarn opens the job, creates a timeline, and logs all future expenses against it automatically.</p>
               </div>
               <div className="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-transform">
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 text-green-400 flex items-center justify-center mb-6"><FileText className="w-6 h-6"/></div>
                 <h3 className="text-xl font-bold mb-3">Instant Invoicing</h3>
-                <p className="text-sub text-sm leading-relaxed mb-4">"Close Smith job, invoice £4,200." Marli generates a branded PDF instantly, complete with a Stripe payment link.</p>
+                <p className="text-sub text-sm leading-relaxed mb-4">"Close Smith job, invoice £4,200." Arvarn generates a branded PDF instantly, complete with a Stripe payment link.</p>
               </div>
               <div className="glass-panel p-8 rounded-2xl group hover:-translate-y-1 transition-transform">
                 <div className="w-12 h-12 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center mb-6"><CheckCircle2 className="w-6 h-6"/></div>
                 <h3 className="text-xl font-bold mb-3">HMRC Tax AI</h3>
-                <p className="text-sub text-sm leading-relaxed mb-4">"Can I claim my fuel today?" Get cited, plain-English answers based on current HMRC guidance. Snap a receipt, and Marli categorises it.</p>
+                <p className="text-sub text-sm leading-relaxed mb-4">"Can I claim my fuel today?" Get cited, plain-English answers based on current HMRC guidance. Snap a receipt, and Arvarn categorises it.</p>
               </div>
             </div>
           </div>
@@ -114,8 +114,8 @@ export default function Homepage() {
 
         <footer className="border-t border-border py-12 px-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-6 h-6 rounded bg-primary flex items-center justify-center"><span className="text-white text-[10px] font-bold">M</span></div>
-            <span className="font-bold tracking-tight">MarliAI</span>
+            <div className="w-6 h-6 rounded bg-primary flex items-center justify-center"><span className="text-white text-[10px] font-bold">A</span></div>
+            <span className="font-bold tracking-tight">Arvarn</span>
           </div>
           <p className="text-sm text-faint mb-4">UK-Built Data Protection. Your financial data is never used to train external models.</p>
           <div className="flex justify-center gap-6 text-sm text-sub">

@@ -54,7 +54,7 @@ export default function Login({ setAuth }: { setAuth: (t: string) => void }) {
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary rounded-full mix-blend-screen filter blur-[80px] opacity-30" />
         
         <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-bold glow-text">MarliAI</Link>
+          <Link to="/" className="text-3xl font-bold glow-text">Arvarn</Link>
           <p className="text-sub mt-2">Enterprise Authentication</p>
         </div>
 

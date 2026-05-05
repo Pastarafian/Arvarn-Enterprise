@@ -5,9 +5,9 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 
 const useAuth = () => {
-  const [token, setToken] = useState(localStorage.getItem('marli_admin_token'));
-  const login = (t: string) => { localStorage.setItem('marli_admin_token', t); setToken(t); };
-  const logout = () => { localStorage.removeItem('marli_admin_token'); setToken(null); };
+  const [token, setToken] = useState(localStorage.getItem('arvarn_admin_token'));
+  const login = (t: string) => { localStorage.setItem('arvarn_admin_token', t); setToken(t); };
+  const logout = () => { localStorage.removeItem('arvarn_admin_token'); setToken(null); };
   return { token, login, logout };
 };
 

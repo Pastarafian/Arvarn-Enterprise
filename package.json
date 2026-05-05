@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "arvarn-enterprise",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/Pastarafian/Arvarn-Enterprise.git"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",

@@ -61,7 +61,7 @@ export default function Dashboard({ token, logout }: { token: string; logout: ()
       <main className="flex-1 flex flex-col overflow-hidden relative">
         <header className="h-16 glass-panel border-b border-border rounded-none flex items-center justify-between px-8 z-10">
           <div className="flex items-center text-sm text-sub">
-            <span className="w-2 h-2 rounded-full bg-green-500 mr-2 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+            <span className="w-2 h-2 rounded-full bg-primary mr-2 shadow-sm shadow-primary/80" />
             System Online
           </div>
           <div className="flex items-center gap-4">
@@ -78,11 +78,11 @@ export default function Dashboard({ token, logout }: { token: string; logout: ()
           <div className="max-w-6xl mx-auto space-y-8 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
                 <h3 className="text-sub text-sm font-medium">Active Agents</h3>
                 <div className="mt-2 flex items-baseline gap-2">
                   <span className="text-4xl font-bold">{data.active_agents}</span>
-                  <span className="text-green-400 text-sm font-medium">+2 this week</span>
+                  <span className="text-primary text-sm font-medium">+2 this week</span>
                 </div>
               </div>
               <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group">
@@ -114,18 +114,18 @@ export default function Dashboard({ token, logout }: { token: string; logout: ()
                 <AreaChart data={data.timeseries} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorInvoices" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <XAxis dataKey="timestamp" stroke="#64748b" tickFormatter={(v) => new Date(v).getHours() + ':00'} />
-                  <YAxis stroke="#64748b" />
+                  <XAxis dataKey="timestamp" stroke="var(--color-border)" tickFormatter={(v) => new Date(v).getHours() + ':00'} />
+                  <YAxis stroke="var(--color-border)" />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', borderColor: '#334155', borderRadius: '8px', backdropFilter: 'blur(4px)' }}
-                    itemStyle={{ color: '#f8fafc' }}
+                    contentStyle={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)', borderRadius: '8px', backdropFilter: 'blur(4px)' }}
+                    itemStyle={{ color: 'var(--color-text)' }}
                   />
-                  <Area type="monotone" dataKey="invoices_generated" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorInvoices)" />
-                  <Area type="monotone" dataKey="jobs_created" stroke="#ec4899" strokeWidth={2} strokeDasharray="4 4" fill="none" />
+                  <Area type="monotone" dataKey="invoices_generated" stroke="var(--color-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorInvoices)" />
+                  <Area type="monotone" dataKey="jobs_created" stroke="var(--color-secondary)" strokeWidth={2} strokeDasharray="4 4" fill="none" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -142,7 +142,7 @@ export default function Dashboard({ token, logout }: { token: string; logout: ()
                 </div>
                 <div className="p-4 bg-bg/50 border border-border rounded-xl flex items-center justify-between hover:border-primary/50 cursor-pointer transition-all">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><CheckCircle2 className="w-5 h-5"/></div>
+                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary"><CheckCircle2 className="w-5 h-5"/></div>
                     <div><div className="font-medium">Stripe Billing</div><div className="text-xs text-sub">Enterprise Plan • Active</div></div>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-sub" />

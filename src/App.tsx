@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Home';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 
@@ -18,6 +19,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/onboarding" element={<Login setAuth={login} />} />
         <Route path="/login" element={<Login setAuth={login} />} />
         <Route path="/dashboard" element={token ? <Dashboard token={token} logout={logout} /> : <Login setAuth={login} />} />

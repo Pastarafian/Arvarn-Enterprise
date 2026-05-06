@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arvarn - Ad Animation v3</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .mobile-frame {
+            width: 400px;
+            height: 711px; /* 16:9 ratio */
+            background-color: #0C1821;
+            position: relative;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.1);
+            border: 8px solid #1B2A41;
+        }
+
+        /* Background Glow */
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.15) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        /* --- PHASE 1: TITLE SCREEN (0s to 3s) --- */
+        .title-screen {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 50;
+            background-color: #000000;
+            animation: fadeOut 0.5s ease 3s forwards;
+        }
+        .title-screen h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            animation: slideUp 0.6s ease forwards;
+            background: linear-gradient(135deg, #fff, #CCC9DC);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .title-screen .badge {
+            background-color: #00FFCC;
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: popIn 0.5s ease 0.3s backwards;
+        }
+        .title-screen p {
+            color: #CCC9DC;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.8s forwards;
+        }
+
+        /* --- PHASE 2: WHATSAPP DEMO (3s to 9s) --- */
+        .wa-container {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background-color: #0C1821;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 3s forwards, fadeOut 0.5s ease 9s forwards;
+        }
+        .wa-header {
+            background-color: #1B2A41;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #324A5F;
+        }
+        .wa-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #00FFCC, #00B8FF);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #000;
+        }
+        .wa-info h2 { font-size: 1.1rem; }
+        .wa-info p { font-size: 0.8rem; color: #00FFCC; display: flex; align-items: center; gap: 5px; }
+        .wa-info p::before { content: ''; width: 6px; height: 6px; background-color: #00FFCC; border-radius: 50%; }
+
+        .chat-area { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .msg.user { align-self: flex-end; background-color: #00FFCC; color: #000; border-bottom-right-radius: 4px; font-weight: 600; }
+        .msg.arvarn { align-self: flex-start; background-color: #1B2A41; color: #fff; border-bottom-left-radius: 4px; border: 1px solid #324A5F; }
+        
+        .msg-1 { animation: slideUpFade 0.4s ease 4s forwards; }
+        .msg-2 { animation: slideUpFade 0.4s ease 5.5s forwards; }
+        
+        .wa-footer {
+            position: absolute;
+            bottom: 0; width: 100%; padding: 15px; background-color: #0C1821; border-top: 1px solid #1B2A41;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .wa-input { flex: 1; background-color: #1B2A41; border-radius: 20px; padding: 12px 20px; color: #CCC9DC; font-size: 0.9rem; }
+        .wa-send { width: 40px; height: 40px; background-color: #00FFCC; border-radius: 50%; display: flex; justify-content: center; align-items: center; color:#000; font-weight:bold;}
+
+        /* --- PHASE 3: FEATURE MATRIX (9s to 15s) --- */
+        .features-screen {
+            position: absolute;
+            inset: 0;
+            background-color: #000000;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 9s forwards, fadeOut 0.5s ease 15s forwards;
+        }
+        .features-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .features-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #00FFCC;
+            line-height: 1.1;
+        }
+        
+        .grid-3x3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            flex: 1;
+        }
+        .skill-box {
+            background-color: #0C1821;
+            border: 1px solid #1B2A41;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px 5px;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        .skill-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .skill-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #CCC9DC;
+            line-height: 1.2;
+        }
+
+        /* Sequential Grid Animation */
+        .skill-1 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.5s forwards; }
+        .skill-2 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.6s forwards; }
+        .skill-3 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.7s forwards; }
+        .skill-4 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.8s forwards; }
+        .skill-5 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.9s forwards; }
+        .skill-6 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.0s forwards; }
+        .skill-7 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.1s forwards; }
+        .skill-8 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.2s forwards; }
+        .skill-9 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.3s forwards; }
+
+
+        /* --- PHASE 4: FINAL CTA (15s onwards) --- */
+        .cta-screen {
+            position: absolute;
+            inset: 0;
+            background-color: #0C1821;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 15s forwards;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .cta-logo {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #00FFCC, #00B8FF);
+            border-radius: 20px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 2.5rem; font-weight: 800; color: #000;
+            margin-bottom: 20px;
+        }
+
+        .cta-screen h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        .cta-screen p {
+            color: #CCC9DC;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        .cta-btn {
+            background-color: #00FFCC;
+            color: #000;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        /* Keyframes */
+        @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+        @keyframes fadeIn { to { opacity: 1; pointer-events: auto; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { to { transform: translateY(0); } }
+        @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-frame">
+        <div class="glow"></div>
+
+        <!-- PHASE 1: Title -->
+        <div class="title-screen">
+            <div class="badge">Arvarn AI</div>
+            <h1>The AI built for tradesmen.</h1>
+            <p>Stop doing admin at 8 PM.</p>
+        </div>
+
+        <!-- PHASE 2: WhatsApp Demo -->
+        <div class="wa-container">
+            <div class="wa-header">
+                <div class="wa-avatar">A</div>
+                <div class="wa-info">
+                    <h2>Arvarn AI</h2>
+                    <p>online</p>
+                </div>
+            </div>
+            <div class="chat-area">
+                <div class="msg user msg-1">Invoice the Smith job for £4,200.</div>
+                <div class="msg arvarn msg-2">
+                    <div style="background:rgba(255,255,255,0.1); padding:10px; border-radius:8px; margin-bottom:8px; font-weight:bold; font-size:0.8rem;">
+                        📄 Smith_Invoice.pdf
+                    </div>
+                    Done. I've also generated your Stripe payment link:<br><br><span style="color:#00FFCC">pay.stripe.com/test</span>
+                </div>
+            </div>
+            <div class="wa-footer">
+                <div class="wa-input">Message...</div>
+                <div class="wa-send">➤</div>
+            </div>
+        </div>
+
+        <!-- PHASE 3: Feature Matrix -->
+        <div class="features-screen">
+            <div class="features-header">
+                <h2>38+ Skills.</h2>
+                <h2 style="color: #fff;">Zero Dashboards.</h2>
+            </div>
+            <div class="grid-3x3">
+                <div class="skill-box skill-1"><div class="skill-icon">📞</div><div class="skill-name">Voice<br>Agent</div></div>
+                <div class="skill-box skill-2"><div class="skill-icon">🛒</div><div class="skill-name">DOM<br>Scraping</div></div>
+                <div class="skill-box skill-3"><div class="skill-icon">🚚</div><div class="skill-name">Fleet<br>Routing</div></div>
+                <div class="skill-box skill-4"><div class="skill-icon">📄</div><div class="skill-name">Instant<br>Invoicing</div></div>
+                <div class="skill-box skill-5"><div class="skill-icon">📸</div><div class="skill-name">Receipt<br>OCR</div></div>
+                <div class="skill-box skill-6"><div class="skill-icon">💬</div><div class="skill-name">Outbound<br>Sales</div></div>
+                <div class="skill-box skill-7"><div class="skill-icon">👨‍🔧</div><div class="skill-name">Inter-Team<br>Dispatch</div></div>
+                <div class="skill-box skill-8"><div class="skill-icon">📐</div><div class="skill-name">Agentic<br>2D CAD</div></div>
+                <div class="skill-box skill-9"><div class="skill-icon">💻</div><div class="skill-name">Code<br>Synthesis</div></div>
+            </div>
+        </div>
+
+        <!-- PHASE 4: Final CTA -->
+        <div class="cta-screen">
+            <div class="cta-logo">A</div>
+            <h2>Arvarn Enterprise</h2>
+            <p>Scale from Solo to Fleet.</p>
+            <div class="cta-btn">Start Free Trial</div>
+        </div>
+    </div>
+</body>
+</html>

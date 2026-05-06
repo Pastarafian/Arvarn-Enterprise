@@ -4,21 +4,29 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const plans = [
   {
+    id: 'core',
+    name: 'Core',
+    price: '£30',
+    period: '/month',
+    description: 'Perfect for independent tradesmen.',
+    features: ['1 Admin Account', 'Universal Skills & Trade Specifics', 'Agentic Procurement (DOM Scraping)', 'Basic Price Comparison', 'Reactive AI Assistant'],
+  },
+  {
     id: 'pro',
     name: 'Pro',
-    price: '£99',
+    price: '£75',
     period: '/month',
-    description: 'Perfect for small tradesmen teams.',
-    features: ['5 Employee Accounts', 'Standard AI Skills', 'Email Support', 'Basic Analytics'],
+    description: 'For growing businesses wanting automation.',
+    features: ['Up to 3 Team Members', 'Inter-Team AI Dispatch', 'Everything in Core', 'Custom Skills Generation', 'Proactive Outbound Sales', '2D CAD & Floorplan Generation', 'Hive Mind Intelligence Access'],
+    popular: true,
   },
   {
     id: 'enterprise',
     name: 'Enterprise',
-    price: '£299',
+    price: '£250',
     period: '/month',
-    description: 'Advanced fleet routing and zero-touch API.',
-    features: ['Unlimited Employees', 'Custom Agentic Skills', 'Priority 24/7 Support', 'Dedicated Account Manager', 'Advanced API Access'],
-    popular: true,
+    description: 'Complete fleet and operations control.',
+    features: ['Up to 30 Team Members', 'Everything in Pro', 'Advanced Fleet Routing', 'Dedicated Account Manager', 'Zero-touch API Access'],
   }
 ];
 
@@ -51,8 +59,7 @@ export default function Signup() {
     { sender: 'ai', text: "Hi! I'm Arvarn. To set up your bespoke AI agent, let's have a quick chat. First, what's the name of your business and your primary operating postcode or city?", type: 'text' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
-  const [chatStage, setChatStage] = useState(0); 
-  const [pendingSuggestion, setPendingSuggestion] = useState('');
+  const [chatStage, setChatStage] = useState(0);
   
   // Merchant State
   const [merchants, setMerchants] = useState([
@@ -114,44 +121,56 @@ export default function Signup() {
       else if (chatStage === 4) {
         const lowerMsg = userMsg.toLowerCase();
         
-        if (lowerMsg.includes('invoice') || lowerMsg.includes('quote') || lowerMsg.includes('receipt') || lowerMsg.includes('calendar') || lowerMsg.includes('book')) {
+        // Universal Core Skills
+        if (lowerMsg.includes('invoice') || lowerMsg.includes('quote') || lowerMsg.includes('receipt') || lowerMsg.includes('weather')) {
           setChatHistory(prev => [
             ...prev, 
-            { sender: 'ai', text: "Great news—I can already do that straight out of the box! I've loaded those specialized modules into your core skills. You're fully configured now. Click 'Review & Checkout' to finalize your tenant provisioning.", type: 'text' }
+            { sender: 'ai', text: "Great news—I can already do that straight out of the box! I've loaded those specialized modules into your Core skills. You're fully configured now. Click 'Review & Checkout' to finalize your tenant provisioning.", type: 'text' }
           ]);
+          setSelectedPlan('core');
           setChatStage(6);
-        } else {
-          setPendingSuggestion(userMsg);
+        } 
+        // Pro / Enterprise Upgrades
+        else if (lowerMsg.includes('book') || lowerMsg.includes('routine') || lowerMsg.includes('outbound') || lowerMsg.includes('sales')) {
           setChatHistory(prev => [
             ...prev, 
-            { sender: 'ai', text: "I can't do that just yet! Would you like me to submit that as a feature request suggestion directly to our engineering team?", type: 'text' }
+            { sender: 'ai', text: "That is exactly what our Proactive Outbound Sales engine is built for! I can autonomously text customers to book routine maintenance and generate Stripe payment links for you. I've selected the **Pro Tier** to enable this feature. Click 'Review & Checkout' to launch.", type: 'text' }
           ]);
-          setChatStage(5);
+          setSelectedPlan('pro');
+          setChatStage(6);
         }
-      }
-      else if (chatStage === 5) {
-        const lowerMsg = userMsg.toLowerCase();
-        let finalResponse = "";
-        
-        if (lowerMsg.includes('yes') || lowerMsg.includes('sure') || lowerMsg.includes('yeah') || lowerMsg.includes('please')) {
-          const abusiveWords = ['fuck', 'shit', 'bitch', 'cunt', 'dick', 'stupid', 'idiot'];
-          const isAbusive = abusiveWords.some(word => pendingSuggestion.toLowerCase().includes(word));
-          const isGibberish = pendingSuggestion.length < 4 || pendingSuggestion.split(' ').every(w => w.length === 1);
-          
-          if (isAbusive || isGibberish) {
-            finalResponse = "Actually, I cannot submit that specific request as it violates our feedback policy.";
-          } else {
-            finalResponse = "Fantastic. I've logged this directly with our engineering team, and they will review it for the next update!";
-          }
-        } else {
-          finalResponse = "No problem, I won't log it.";
+        else if (lowerMsg.includes('phone') || lowerMsg.includes('call') || lowerMsg.includes('answer') || lowerMsg.includes('voice')) {
+          setChatHistory(prev => [
+            ...prev, 
+            { sender: 'ai', text: "I can absolutely do that. Our Voice Agent can answer incoming calls from customers while you're busy, or even call you directly if there is an emergency! I've upgraded your selection to the **Pro Tier** to enable Voice. Click 'Review & Checkout' to finalize.", type: 'text' }
+          ]);
+          setSelectedPlan('pro');
+          setChatStage(6);
         }
-        
-        setChatHistory(prev => [
-          ...prev, 
-          { sender: 'ai', text: `${finalResponse} By the way, you can type 'feedback' or 'suggest' directly to me in WhatsApp anytime. You're fully configured now. Click 'Review & Checkout' to finalize your tenant provisioning.`, type: 'text' }
-        ]);
-        setChatStage(6);
+        else if (lowerMsg.includes('cad') || lowerMsg.includes('drawing') || lowerMsg.includes('floorplan') || lowerMsg.includes('plan')) {
+          setChatHistory(prev => [
+            ...prev, 
+            { sender: 'ai', text: "I can absolutely do that! Agentic 2D CAD and Floorplan generation to PDF is included in our Pro and Enterprise tiers. I've upgraded your selection to the **Pro Tier**. Click 'Review & Checkout' to finalize.", type: 'text' }
+          ]);
+          setSelectedPlan('pro');
+          setChatStage(6);
+        }
+        else if (lowerMsg.includes('fleet') || lowerMsg.includes('van') || lowerMsg.includes('employee') || lowerMsg.includes('subcontractor') || lowerMsg.includes('team')) {
+          setChatHistory(prev => [
+            ...prev, 
+            { sender: 'ai', text: "For managing multiple workers and vans, you need our Advanced Fleet Routing. I can track subcontractors, dynamically route vans to emergencies, and manage payroll autonomously. I've selected the **Enterprise Tier** to support your whole fleet. Click 'Review & Checkout' to launch.", type: 'text' }
+          ]);
+          setSelectedPlan('enterprise');
+          setChatStage(6);
+        }
+        else {
+          setChatHistory(prev => [
+            ...prev, 
+            { sender: 'ai', text: "I don't have that skill off-the-shelf, but with our **Pro Tier**, my Autonomous Synthesis Engine will actually write and test that custom code specifically for you! I've upgraded you to Pro so we can build that. Click 'Review & Checkout' to launch your workspace.", type: 'text' }
+          ]);
+          setSelectedPlan('pro');
+          setChatStage(6);
+        }
       }
     }, 1500);
   };

@@ -42,50 +42,32 @@
             border-radius: 50%;
         }
 
-        /* --- PHASE 1: TITLE SCREEN (0s to 2s) --- */
-        .title-screen {
+        /* --- PHASE 1: WHATSAPP DEMO WITH HOOK (0s to 6s) --- */
+        .hook-banner {
             position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            z-index: 50;
-            background-color: #000000;
-            animation: fadeOut 0.5s ease 3s forwards;
-        }
-        .title-screen h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            animation: slideUp 0.6s ease forwards;
-            background: linear-gradient(135deg, #fff, #CCC9DC);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .title-screen .badge {
-            background-color: #00FFCC;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            background: linear-gradient(135deg, #00FFCC, #00B8FF);
             color: #000;
-            padding: 5px 12px;
+            padding: 15px 25px;
             border-radius: 20px;
             font-weight: 800;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            animation: popIn 0.5s ease 0.3s backwards;
+            font-size: 1.2rem;
+            text-align: center;
+            z-index: 60;
+            width: 85%;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.4);
+            opacity: 0;
+            animation: dropInFadeOut 2.5s ease forwards;
         }
 
-        /* --- PHASE 2: WHATSAPP DEMO (2s to 7s) --- */
         .wa-container {
             position: absolute;
             inset: 0;
             z-index: 10;
             background-color: #0C1821;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 3s forwards, fadeOut 0.5s ease 9s forwards;
+            animation: fadeOut 0.5s ease 6s forwards;
         }
         .wa-header {
             background-color: #1B2A41;
@@ -94,6 +76,8 @@
             align-items: center;
             gap: 15px;
             border-bottom: 1px solid #324A5F;
+            transform: translateY(-100%);
+            animation: slideDown 0.5s ease 0.2s forwards;
         }
         .wa-avatar {
             width: 45px;
@@ -124,18 +108,20 @@
         .msg.user { align-self: flex-end; background-color: #00FFCC; color: #000; border-bottom-right-radius: 4px; font-weight: 600; }
         .msg.arvarn { align-self: flex-start; background-color: #1B2A41; color: #fff; border-bottom-left-radius: 4px; border: 1px solid #324A5F; }
         
-        .msg-1 { animation: slideUpFade 0.4s ease 3.5s forwards; }
-        .msg-2 { animation: slideUpFade 0.4s ease 5.5s forwards; }
+        .msg-1 { animation: slideUpFade 0.4s ease 2.0s forwards; }
+        .msg-2 { animation: slideUpFade 0.4s ease 3.5s forwards; }
         
         .wa-footer {
             position: absolute;
             bottom: 0; width: 100%; padding: 15px; background-color: #0C1821; border-top: 1px solid #1B2A41;
             display: flex; align-items: center; gap: 10px;
+            transform: translateY(100%);
+            animation: slideDown 0.5s ease 0.2s forwards;
         }
         .wa-input { flex: 1; background-color: #1B2A41; border-radius: 20px; padding: 12px 20px; color: #CCC9DC; font-size: 0.9rem; }
         .wa-send { width: 40px; height: 40px; background-color: #00FFCC; border-radius: 50%; display: flex; justify-content: center; align-items: center; color:#000; font-weight:bold;}
 
-        /* --- PHASE 3: FEATURE MATRIX (7s to 11s) --- */
+        /* --- PHASE 2: FEATURE MATRIX (6s to 12s) --- */
         .features-screen {
             position: absolute;
             inset: 0;
@@ -145,7 +131,7 @@
             flex-direction: column;
             padding: 30px 20px;
             opacity: 0;
-            animation: fadeIn 0.5s ease 9s forwards, fadeOut 0.5s ease 15s forwards;
+            animation: fadeIn 0.5s ease 6s forwards, fadeOut 0.5s ease 12s forwards;
         }
         .features-header {
             text-align: center;
@@ -189,18 +175,18 @@
         }
 
         /* Sequential Grid Animation */
-        .skill-1 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.5s forwards; }
-        .skill-2 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.6s forwards; }
-        .skill-3 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.7s forwards; }
-        .skill-4 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.8s forwards; }
-        .skill-5 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 9.9s forwards; }
-        .skill-6 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.0s forwards; }
-        .skill-7 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.1s forwards; }
-        .skill-8 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.2s forwards; }
-        .skill-9 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 10.3s forwards; }
+        .skill-1 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 6.5s forwards; }
+        .skill-2 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 6.6s forwards; }
+        .skill-3 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 6.7s forwards; }
+        .skill-4 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 6.8s forwards; }
+        .skill-5 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 6.9s forwards; }
+        .skill-6 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 7.0s forwards; }
+        .skill-7 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 7.1s forwards; }
+        .skill-8 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 7.2s forwards; }
+        .skill-9 { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 7.3s forwards; }
 
 
-        /* --- PHASE 4: FINAL CTA (11s onwards) --- */
+        /* --- PHASE 3: FINAL CTA (12s onwards) --- */
         .cta-screen {
             position: absolute;
             inset: 0;
@@ -211,7 +197,7 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
-            animation: fadeIn 0.5s ease 15s forwards;
+            animation: fadeIn 0.5s ease 12s forwards;
             padding: 30px;
             text-align: center;
         }
@@ -255,6 +241,7 @@
         @keyframes slideDown { to { transform: translateY(0); } }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes dropInFadeOut { 0% { opacity: 0; transform: translate(-50%, 0); } 15% { opacity: 1; transform: translate(-50%, 20px); } 85% { opacity: 1; transform: translate(-50%, 20px); } 100% { opacity: 0; transform: translate(-50%, 0px); pointer-events:none; } }
 
     </style>
 </head>
@@ -262,13 +249,8 @@
     <div class="mobile-frame">
         <div class="glow"></div>
 
-        <!-- PHASE 1: Title -->
-        <div class="title-screen">
-            <div class="badge">Arvarn AI</div>
-            <h1>Run your trade from WhatsApp.</h1>
-        </div>
-
-        <!-- PHASE 2: WhatsApp Demo -->
+        <!-- PHASE 1: WhatsApp Demo with Hook -->
+        <div class="hook-banner">Stop doing paperwork in the van.</div>
         <div class="wa-container">
             <div class="wa-header">
                 <div class="wa-avatar">A</div>
